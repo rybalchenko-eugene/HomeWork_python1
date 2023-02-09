@@ -3,27 +3,28 @@ from Note import Note
 
 def saveRepo(repo):
     filename = 'Notesrepo.json'
-    repo_temp = {}
+    repo_temp = []
     
-    for i in repo:
-        note = repo[i].getTitle() + "|" + repo[i].getText() + "|" + str(repo[i].getDate())
-        repo_temp[i] = note        
+    for i in range(0,len(repo)):
+        note = repo[i].getTitle() + ";" + repo[i].getText() + ";" + str(repo[i].getDate())
+        repo_temp.append(note)      
     with open(filename, 'w') as f:
         json.dump(repo_temp, f)
+        print("Заметки успешно сохранены")
         
 def loadRepo():
     try:
         filename = 'Notesrepo.json'
         with open(filename) as f:
             repo = json.load(f)
-            repo_temp = {}
-            for i in repo:
+            repo_temp = []
+            for i in range(0,len(repo)):
                 note = str(repo[i])
-                temp = note.split("|", 2)
+                temp = note.split(";", 2)
                 print(temp)
-                repo_temp[i] = Note(temp[0], temp[1])
-                repo_temp[i].setDate(temp[2])
-                
+                temp_note = Note(temp[0], temp[1])
+                temp_note.setDate(temp[2])
+                repo_temp.append(temp_note)
             print(repo_temp)    
             return repo_temp
     except FileNotFoundError:

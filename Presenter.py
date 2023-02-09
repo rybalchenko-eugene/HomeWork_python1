@@ -12,7 +12,7 @@ class Presenter():
         pass
 
     def start(self):
-        repo = {}
+        repo = []
         id = 0
         print("Hello, user. Notebook is working..")
         model = Model()
@@ -27,28 +27,20 @@ class Presenter():
         while True:
             choice = view.userInput()
             if choice == "1":
-                id = len(repo)
-                repo[id] = model.newNote()
-                id = id + 1
+                repo.append(model.newNote())
                 print(repo)
             if choice == "2":
-                for i in repo:
+                for i in range(0,len(repo)):
                     print("ID = ", i)
                     print(repo[i].getTitle())
             if choice == "3":  
-                num = input("Введите номер ID заметки: ")
-                print("количество записей = ", len(repo), "Выбор = ", num)
-                if int(num) > len(repo)-1:
-                    print("Неверный ID")
-                else:         
-                    print("Id = ", num) 
-                    print(repo[num].getTitle())     
-                    print(repo[num].getText()) 
-                    print(repo[num].getDate()) 
+                model.contentNote(repo)
             if choice == "4":
                 repo = loadRepo()
             if choice == "5":
                 saveRepo(repo)
+            if choice == "6":
+                repo = model.delNote(repo)
             if choice == "0":
                 exit(0)
         
