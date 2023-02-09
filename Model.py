@@ -9,30 +9,40 @@ class Model():
         title = input("Введите заголовок заметки: ")
         text = input("Введите текст заметки: ")
         note = Note(title, text)
+        print("Заметка успешно создана\n")
         return note
     
     def contentNote(self, repo):
-        print("количество записей = ", len(repo))
         num = int(input("Введите номер ID заметки: "))
-        print("количество записей = ", len(repo), "Выбор = ", num)
         if int(num) > len(repo)-1:
-            print("Неверный ID")
+            print("Неверный ID\n")
         else:         
             print("Id = ", num) 
-            print(repo[num].getTitle())     
-            print(repo[num].getText()) 
-            print(repo[num].getDate()) 
+            print("Заголовок: ",repo[num].getTitle())     
+            print("Содержание: ",repo[num].getText()) 
+            print("Дата создания: ",repo[num].getDate()) 
 
     def delNote(self, repo):
         print("количество записей = ", len(repo))
         num = int(input("Введите номер ID заметки: "))
-
         if int(num) > len(repo)-1:
             print("Неверный ID\n")
         else:         
             repo.pop(num)
+            print("Заметка удалена\n")
         return repo
       
-
+    def editNote(self, repo):
+        print("количество записей = ", len(repo))
+        num = int(input("Введите номер ID заметки: "))
+        if int(num) > len(repo)-1:
+            print("Неверный ID\n")
+        else:         
+            title = input("Введите заголовок заметки: ")
+            text = input("Введите текст заметки: ")
+            note = Note(title, text)
+            repo[num] = note
+            print("Заметка успешно отредактирована\n")
+        return repo
     
     
